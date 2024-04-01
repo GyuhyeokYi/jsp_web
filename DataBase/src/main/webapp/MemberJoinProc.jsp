@@ -39,13 +39,13 @@
         // 2.해당 데이터 베이스 접속
         Connection con = DriverManager.getConnection(url, id, pass);
         // 3.접속 후, 쿼리 준비 설정
-        String sql = "INSERT INTO MEMBER VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO MEMBER VALUES(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
 
         PreparedStatement pstmt = con.prepareStatement(sql);
         // ?에 맞게 데이터를 매핑
         pstmt.setString(1, mbean.getId());
-        pstmt.setString(2, mbean.getTel());
-        pstmt.setString(3, mbean.getPass1());
+        pstmt.setString(2, mbean.getPass1());
+        pstmt.setString(3, mbean.getTel());
         pstmt.setString(4, mbean.getEmail());
         pstmt.setString(5, mbean.getHobby());
         pstmt.setString(6, mbean.getJob());

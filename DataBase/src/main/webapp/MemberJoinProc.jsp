@@ -1,7 +1,8 @@
 <%@ page import="java.io.IOException" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.PreparedStatement" %><%--
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="model.MemberDAO" %><%--
   Created by IntelliJ IDEA.
   User: kalit
   Date: 2024-03-29
@@ -28,7 +29,7 @@
 
 <%
     mbean.setHobby(textHobby.toString());
-
+    /*
     String id = "JSP_TEST";
     String pass = "12345";
     String url = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -58,6 +59,10 @@
     } catch (Exception e) {
         e.printStackTrace();
     }
+     */
+
+    MemberDAO memberDAO = new MemberDAO();
+    memberDAO.insertMember(mbean);
 %>
 
 오라클 접속 완료

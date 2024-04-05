@@ -3,6 +3,7 @@ package model;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Data
 public class MemberBean {
@@ -16,6 +17,7 @@ public class MemberBean {
     private String job;
     private String age;
     private String info;
+    private String instDtm;
 
     public static void main(String[] args) {
         ArrayList<MemberBean> arrayList = new ArrayList<>();

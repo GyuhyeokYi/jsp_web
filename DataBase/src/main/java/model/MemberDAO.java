@@ -1,9 +1,7 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.util.ArrayList;
 
 // 오라클 연결하고 SELECT, INSERT, UPDATE, DELETE 업무 수행
 public class MemberDAO {
@@ -12,7 +10,7 @@ public class MemberDAO {
     String pass = "12345";
     String url = "jdbc:oracle:thin:@localhost:1521:XE";
     Connection con; // 데이터베이스에 접근할 수 있도록 설정
-    ResultSet rs; // 쿼리의 결과를 리턴 받아 자바에 저장해주는 객체
+    ResultSet resultSet; // 쿼리의 결과를 리턴 받아 자바에 저장해주는 객체
 
     public void getCon() {
         try {
@@ -50,5 +48,32 @@ public class MemberDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<MemberBean> allSelectMember() {
+        ArrayList<MemberBean> list = new ArrayList<>();
+        try {
+            getCon();
+
+            String sql = "SELECT ID, EMAIL, TEL, HOBBY, INST_DTM FROM MEMBER ORDER BY INST_DTM";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            resultSet =  stmt.executeQuery();
+
+            while(resultSet.next()) {
+                MemberBean memberBean = new MemberBean();
+                memberBean.setId(resultSet.getString(1));
+                memberBean.setEmail(resultSet.getString(2));
+                memberBean.setTel(resultSet.getString(3));
+                memberBean.setHobby(resultSet.getString(4));
+                memberBean.setInstDtm(resultSet.getString(5));
+                list.add(memberBean);
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }

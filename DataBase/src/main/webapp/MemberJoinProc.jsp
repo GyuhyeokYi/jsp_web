@@ -63,9 +63,9 @@
 
     MemberDAO memberDAO = new MemberDAO();
     memberDAO.insertMember(mbean);
+
+    // 회원가입이 되었다면 회원정보를 보여주는 페이지로 이동 시킴
+    response.sendRedirect("MemberList.jsp");
 %>
-
-오라클 접속 완료
-
 </body>
 </html>

@@ -55,17 +55,21 @@ public class MemberDAO {
         try {
             getCon();
 
-            String sql = "SELECT ID, EMAIL, TEL, HOBBY, INST_DTM FROM MEMBER ORDER BY INST_DTM";
+            String sql = "SELECT * FROM MEMBER ORDER BY INST_DTM";
             PreparedStatement stmt = con.prepareStatement(sql);
             resultSet =  stmt.executeQuery();
 
             while(resultSet.next()) {
                 MemberBean memberBean = new MemberBean();
                 memberBean.setId(resultSet.getString(1));
-                memberBean.setEmail(resultSet.getString(2));
-                memberBean.setTel(resultSet.getString(3));
-                memberBean.setHobby(resultSet.getString(4));
-                memberBean.setInstDtm(resultSet.getString(5));
+                memberBean.setTel(resultSet.getString(2));
+                memberBean.setPass1(resultSet.getString(3));
+                memberBean.setEmail(resultSet.getString(4));
+                memberBean.setHobby(resultSet.getString(5));
+                memberBean.setJob(resultSet.getString(6));
+                memberBean.setAge(resultSet.getString(7));
+                memberBean.setInfo(resultSet.getString(8));
+                memberBean.setInstDtm(resultSet.getString(9));
                 list.add(memberBean);
             }
 
@@ -75,5 +79,36 @@ public class MemberDAO {
         }
 
         return list;
+    }
+
+    public MemberBean oneSelectMember(String id) {
+        MemberBean memberBean = new MemberBean();
+
+        try {
+            getCon();
+
+            String sql = "SELECT * FROM MEMBER WHERE ID = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, id);
+
+            resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                memberBean.setId(resultSet.getString(1));
+                memberBean.setTel(resultSet.getString(2));
+                memberBean.setPass1(resultSet.getString(3));
+                memberBean.setEmail(resultSet.getString(4));
+                memberBean.setHobby(resultSet.getString(5));
+                memberBean.setJob(resultSet.getString(6));
+                memberBean.setAge(resultSet.getString(7));
+                memberBean.setInfo(resultSet.getString(8));
+                memberBean.setInstDtm(resultSet.getString(9));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return memberBean;
     }
 }

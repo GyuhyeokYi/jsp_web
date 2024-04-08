@@ -22,11 +22,12 @@
     MemberDAO memberDAO = new MemberDAO();
     ArrayList<MemberBean> members = memberDAO.allSelectMember();
 %>
-<div class="text-center">
-    <h2>모든 회원 보기, 회원 수(<%= members.size() %>)</h2>
-</div>
-<table class="table table-striped">
-    <thead>
+<div class="container">
+    <div class="text-center">
+        <h2>모든 회원 보기, 회원 수(<%= members.size() %>)</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
         <tr>
             <th class="text-center" scope="col">#</th>
             <th scope="col">아이디</th>
@@ -35,23 +36,24 @@
             <th scope="col">취미</th>
             <th scope="col">가입일</th>
         </tr>
-    </thead>
-    <tbody>
-    <%
-        for(MemberBean member: members) {
-    %>
+        </thead>
+        <tbody>
+        <%
+            for(MemberBean member: members) {
+        %>
         <tr>
             <th class="text-center" scope="row"><%= members.indexOf(member) + 1 %></th>
-            <td><%= member.getId() %></td>
+            <td><a href="MemberInfo.jsp?id=<%= member.getId() %>"><%= member.getId() %></a></td>
             <td><%= member.getEmail() %></td>
             <td><%= member.getTel() %></td>
             <td><%= member.getHobby() %></td>
             <td><%= member.getInstDtm() %></td>
         </tr>
-    <%
-        }
-    %>
-    </tbody>
-</table>
+        <%
+            }
+        %>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -79,7 +79,7 @@
             <tr>
                 <td class="text-center" colspan="2">
                     <input type="submit" class="btn btn-primary" value="회원가입">
-                    <input type="reset" class="btn btn-primary" value="취소">
+                    <input type="reset" class="btn btn-primary" value="취소" onclick="window.history.back()">
                 </td>
             </tr>
         </table>

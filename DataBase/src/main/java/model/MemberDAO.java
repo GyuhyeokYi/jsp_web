@@ -62,8 +62,8 @@ public class MemberDAO {
             while(resultSet.next()) {
                 MemberBean memberBean = new MemberBean();
                 memberBean.setId(resultSet.getString(1));
-                memberBean.setTel(resultSet.getString(2));
-                memberBean.setPass1(resultSet.getString(3));
+                memberBean.setPass1(resultSet.getString(2));
+                memberBean.setTel(resultSet.getString(3));
                 memberBean.setEmail(resultSet.getString(4));
                 memberBean.setHobby(resultSet.getString(5));
                 memberBean.setJob(resultSet.getString(6));
@@ -95,8 +95,8 @@ public class MemberDAO {
 
             if (resultSet.next()) {
                 memberBean.setId(resultSet.getString(1));
-                memberBean.setTel(resultSet.getString(2));
-                memberBean.setPass1(resultSet.getString(3));
+                memberBean.setPass1(resultSet.getString(2));
+                memberBean.setTel(resultSet.getString(3));
                 memberBean.setEmail(resultSet.getString(4));
                 memberBean.setHobby(resultSet.getString(5));
                 memberBean.setJob(resultSet.getString(6));

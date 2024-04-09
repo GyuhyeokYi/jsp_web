@@ -89,10 +89,48 @@ public class MemberDAO {
                 memberBean.setMemberData(resultSet);
             }
 
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return memberBean;
+    }
+
+    public int deleteMember(String id) {
+        int result = 0;
+        try {
+            getCon();
+
+            String sql = "DELETE FROM MEMBER WHERE ID = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+
+            result = pstmt.executeUpdate();
+            con.close();
+        } catch (Exception e)  {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public int updateMember(MemberBean mbean) {
+        int result = 0;
+        try {
+            getCon();
+
+            String sql = "UPDATE MEMBER SET EMAIL = ?, TEL = ? WHERE ID = ? AND PASS1 = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, mbean.getEmail());
+            pstmt.setString(2, mbean.getTel());
+            pstmt.setString(3, mbean.getId());
+            pstmt.setString(4, mbean.getPass1());
+
+            result = pstmt.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

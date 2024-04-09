@@ -25,7 +25,7 @@
         <table class="table table-striped">
             <tr>
                 <td>아이디</td>
-                <td><%= memberBean.getId() %></td>
+                <td><input readonly type="text" class="form-control" name="id" value="<%= memberBean.getId() %>"></td>
             </tr>
             <tr>
                 <td>이메일</td>

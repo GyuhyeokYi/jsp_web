@@ -2,6 +2,7 @@ package model;
 
 import lombok.Data;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,6 +20,21 @@ public class MemberBean {
     private String info;
     private String instDtm;
 
+    public void setMemberData(ResultSet resultSet) {
+        try {
+            setId(resultSet.getString(1));
+            setPass1(resultSet.getString(2));
+            setTel(resultSet.getString(3));
+            setEmail(resultSet.getString(4));
+            setHobby(resultSet.getString(5));
+            setJob(resultSet.getString(6));
+            setAge(resultSet.getString(7));
+            setInfo(resultSet.getString(8));
+            setInstDtm(resultSet.getString(9));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         ArrayList<MemberBean> arrayList = new ArrayList<>();
 

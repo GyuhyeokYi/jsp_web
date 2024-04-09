@@ -61,15 +61,7 @@ public class MemberDAO {
 
             while(resultSet.next()) {
                 MemberBean memberBean = new MemberBean();
-                memberBean.setId(resultSet.getString(1));
-                memberBean.setPass1(resultSet.getString(2));
-                memberBean.setTel(resultSet.getString(3));
-                memberBean.setEmail(resultSet.getString(4));
-                memberBean.setHobby(resultSet.getString(5));
-                memberBean.setJob(resultSet.getString(6));
-                memberBean.setAge(resultSet.getString(7));
-                memberBean.setInfo(resultSet.getString(8));
-                memberBean.setInstDtm(resultSet.getString(9));
+                memberBean.setMemberData(resultSet);
                 list.add(memberBean);
             }
 
@@ -94,15 +86,7 @@ public class MemberDAO {
             resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {
-                memberBean.setId(resultSet.getString(1));
-                memberBean.setPass1(resultSet.getString(2));
-                memberBean.setTel(resultSet.getString(3));
-                memberBean.setEmail(resultSet.getString(4));
-                memberBean.setHobby(resultSet.getString(5));
-                memberBean.setJob(resultSet.getString(6));
-                memberBean.setAge(resultSet.getString(7));
-                memberBean.setInfo(resultSet.getString(8));
-                memberBean.setInstDtm(resultSet.getString(9));
+                memberBean.setMemberData(resultSet);
             }
 
         } catch (Exception e) {

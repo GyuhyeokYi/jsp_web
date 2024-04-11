@@ -29,43 +29,23 @@
 
 <%
     mbean.setHobby(textHobby.toString());
-    /*
-    String id = "JSP_TEST";
-    String pass = "12345";
-    String url = "jdbc:oracle:thin:@localhost:1521:XE";
-
-    try {
-        // 1.해당 데이터 베이스 사용한다고 선언(클래스=오라크용을 사용)
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        // 2.해당 데이터 베이스 접속
-        Connection con = DriverManager.getConnection(url, id, pass);
-        // 3.접속 후, 쿼리 준비 설정
-        String sql = "INSERT INTO MEMBER VALUES(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE)";
-
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        // ?에 맞게 데이터를 매핑
-        pstmt.setString(1, mbean.getId());
-        pstmt.setString(2, mbean.getPass1());
-        pstmt.setString(3, mbean.getTel());
-        pstmt.setString(4, mbean.getEmail());
-        pstmt.setString(5, mbean.getHobby());
-        pstmt.setString(6, mbean.getJob());
-        pstmt.setString(7, mbean.getAge());
-        pstmt.setString(8, mbean.getInfo());
-
-        pstmt.executeUpdate(); // insert, update, delete 시 사용하는 메소드
-
-        con.close();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-     */
-
-    MemberDAO memberDAO = new MemberDAO();
-    memberDAO.insertMember(mbean);
-
-    // 회원가입이 되었다면 회원정보를 보여주는 페이지로 이동 시킴
-    response.sendRedirect("MemberList.jsp");
+     if (mbean.getPass1().equals(mbean.getPass2())) {
+         MemberDAO memberDAO = new MemberDAO();
+         memberDAO.insertMember(mbean);
+%>
+<script>
+    alert("회원가입에 성공하셨습니다.")
+    window.location.href="MemberList.jsp"
+</script>
+<%
+     } else {
+%>
+<script>
+    alert("입력하신 비밀번호가 일치 하지 않습니다.")
+    window.history.back()
+</script>
+<%
+     }
 %>
 </body>
 </html>

@@ -16,18 +16,18 @@
 <div class="container">
     <h2 class="text-center">회원가입</h2>
     <form action="MemberJoinProc.jsp" method="post">
-        <table class="table table-striped">
+        <table class="table table-striped align-middle">
             <tr>
                 <td class="text-center">아이디</td>
-                <td class="value pad-10"><input type="text" name="id" class="form-control" placeholder="id넣으세요"></td>
+                <td class="value pad-10"><input type="text" name="id" class="form-control" placeholder="id넣으세요" required></td>
             </tr>
             <tr>
                 <td class="text-center">패스워드</td>
-                <td class="value pad-10"><input type="password" name="pass1" class="form-control" placeholder="영문과숫자만 넣어주세요."></td>
+                <td class="value pad-10"><input type="password" name="pass1" class="form-control" placeholder="영문과숫자만 넣어주세요." required></td>
             </tr>
             <tr>
                 <td class="text-center">패스워드확인</td>
-                <td class="value pad-10"><input type="password" name="pass2" class="form-control"></td>
+                <td class="value pad-10"><input type="password" name="pass2" class="form-control" required></td>
             </tr>
             <tr>
                 <td class="text-center">이메일</td>
@@ -39,11 +39,11 @@
             </tr>
             <tr>
                 <td class="text-center">당신의 관심분야</td>
-                <td class="value center">
-                    <input type="checkbox" class="form-check-input mt-0" name="hobby" value="캠핑">캠핑 &nbsp;&nbsp;
-                    <input type="checkbox" class="form-check-input mt-0" name="hobby" value="등산">등산 &nbsp;&nbsp;
-                    <input type="checkbox" class="form-check-input mt-0" name="hobby" value="영화">영화 &nbsp;&nbsp;
-                    <input type="checkbox" class="form-check-input mt-0" name="hobby" value="독서">독서 &nbsp;&nbsp;
+                <td class="align-middle">
+                    <input type="checkbox" class="form-check-input" name="hobby" value="캠핑">캠핑 &nbsp;&nbsp;
+                    <input type="checkbox" class="form-check-input" name="hobby" value="등산">등산 &nbsp;&nbsp;
+                    <input type="checkbox" class="form-check-input" name="hobby" value="영화">영화 &nbsp;&nbsp;
+                    <input type="checkbox" class="form-check-input" name="hobby" value="독서">독서 &nbsp;&nbsp;
                 </td>
             </tr>
             <tr>
@@ -61,10 +61,10 @@
             <tr>
                 <td class="text-center">당신의 연령은</td>
                 <td class="value center">
-                    <input type="radio" class="form-check-input mt-0" name="age" value="10">10대 &nbsp;&nbsp;
-                    <input type="radio" class="form-check-input mt-0" name="age" value="20">20대 &nbsp;&nbsp;
-                    <input type="radio" class="form-check-input mt-0" name="age" value="30">30대 &nbsp;&nbsp;
-                    <input type="radio" class="form-check-input mt-0" name="age" value="40">40대 &nbsp;&nbsp;
+                    <input type="radio" class="form-check-input" name="age" value="10" checked>10대 &nbsp;&nbsp;
+                    <input type="radio" class="form-check-input" name="age" value="20">20대 &nbsp;&nbsp;
+                    <input type="radio" class="form-check-input" name="age" value="30">30대 &nbsp;&nbsp;
+                    <input type="radio" class="form-check-input" name="age" value="40">40대 &nbsp;&nbsp;
                 </td>
             </tr>
             <tr>

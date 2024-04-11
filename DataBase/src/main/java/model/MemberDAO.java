@@ -133,4 +133,26 @@ public class MemberDAO {
         }
         return result;
     }
+
+    public String getPass(String id) {
+        String pass = "";
+
+        try {
+            getCon();
+
+            String sql = "SELECT PASS1 FROM MEMBER WHERE ID = ?";
+            PreparedStatement pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+
+            resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+                pass = resultSet.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pass;
+    }
 }

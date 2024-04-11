@@ -22,10 +22,10 @@
         <h2>회원 정보 수정하기</h2>
     </div>
     <form action="MemberUpdateProc.jsp" method="post">
-        <table class="table table-striped">
+        <table class="table table-striped align-middle">
             <tr>
                 <td>아이디</td>
-                <td><input readonly type="text" class="form-control" name="id" value="<%= memberBean.getId() %>"></td>
+                <td><%= memberBean.getId() %></td>
             </tr>
             <tr>
                 <td>이메일</td>
@@ -41,6 +41,7 @@
             </tr>
             <tr>
                 <td colspan="2" class="text-center">
+                    <input type="hidden" name="id" value="<%= memberBean.getId() %>">
                     <input type="submit" class="btn btn-primary" value="회원 수정하기">
                     <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">회원 전체 보기</button>
                 </td>

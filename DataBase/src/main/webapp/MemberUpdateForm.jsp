@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <title>회원정보 수정</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
@@ -25,7 +26,10 @@
         <table class="table table-striped align-middle">
             <tr>
                 <td>아이디</td>
-                <td><%= memberBean.getId() %></td>
+                <td>
+                    <%= memberBean.getId() %>
+                    <input type="hidden" name="id" value="<%= memberBean.getId() %>">
+                </td>
             </tr>
             <tr>
                 <td>이메일</td>
@@ -39,14 +43,12 @@
                 <td>패스워드</td>
                 <td><input type="password" class="form-control" name="pass1" required></td>
             </tr>
-            <tr>
-                <td colspan="2" class="text-center">
-                    <input type="hidden" name="id" value="<%= memberBean.getId() %>">
-                    <input type="submit" class="btn btn-primary" value="회원 수정하기">
-                    <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">회원 전체 보기</button>
-                </td>
-            </tr>
         </table>
+        <div class="container text-center">
+<%--            <input type="submit" class="btn btn-primary" value="회원 수정하기">--%>
+            <button type="submit" class="btn btn-primary">회원 수정하기</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">회원 전체 보기</button>
+        </div>
     </form>
 </div>
 </body>

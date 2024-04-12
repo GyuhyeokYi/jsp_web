@@ -16,7 +16,7 @@
 <body>
 <div class="container">
     <div class="text-center">
-        <h2>회원 삭제 하기</h2>
+        <h2>회원 삭제</h2>
     </div>
     <form action="MemberDeleteProc.jsp" method="post">
         <table class="table table-striped align-middle">
@@ -32,7 +32,7 @@
                 <td colspan="2" class="text-center">
                     <input type="hidden" name="id" value="<%= request.getParameter("id") %>">
                     <input type="submit" class="btn btn-primary" value="회원 삭제하기">
-                    <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">회원 전체 보기</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">회원 전체보기</button>
                 </td>
             </tr>
         </table>

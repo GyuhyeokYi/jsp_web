@@ -1,5 +1,9 @@
 package model;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -12,7 +16,18 @@ public class MemberDAO {
     Connection con; // 데이터베이스에 접근할 수 있도록 설정
     ResultSet resultSet; // 쿼리의 결과를 리턴 받아 자바에 저장해주는 객체
 
+    DataSource dataSource;
     public void getCon() {
+        // 커넥션풀을 이용함.
+        try {
+            Context context = new InitialContext();
+            dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool");
+            con = dataSource.getConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /*
         try {
             // 1.해당 데이터 베이스 사용한다고 선언(클래스=오라크용을 사용)
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -21,6 +36,7 @@ public class MemberDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
     }
 
     // 데이터 베이스의 한사람의 회원 정보를 저장해주는 메소그

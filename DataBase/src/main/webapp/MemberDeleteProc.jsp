@@ -12,25 +12,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
+<jsp:useBean id="mbean" class="model.MemberBean">
+    <jsp:setProperty name="mbean" property="*" /> <!-- 데이터 매핑 -->
+</jsp:useBean>
 <%
+    String id = request.getParameter("id");
     MemberDAO memberDAO = new MemberDAO();
-    int result = memberDAO.deleteMember(request.getParameter("id"));
-%>
-<div class="container text-center">
-    <%
+
+    String pass = memberDAO.getPass(id);
+
+    if (mbean.getPass1().equals(pass)) {
+        int result = memberDAO.deleteMember(mbean.getId());
         if (result > 0) {
-    %>
-    <h2>회원삭제 성공</h2>
-    <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">목록보기</button>
-    <%
+%>
+<script>
+    alert("회원정보 삭제에 성공하였습니다.")
+    location.href = 'MemberList.jsp'
+</script>
+<%
         } else {
-    %>
-    <h2>회원삭제 실패</h2>
-    <button type="button" class="btn btn-primary" onclick="window.history.back()">이전</button>
-    <%
+%>
+<script>
+    alert("회원정보 삭제에 실패하였습니다.")
+    window.history.back()
+</script>
+<%
         }
-        //    response.sendRedirect("MemberList.jsp");
-    %>
-</div>
+    } else {
+%>
+<script>
+    alert("패스워드가 맞지 않습니다. 다시 확인 해주세요.")
+    window.history.back()
+</script>
+<%
+    }
+%>
 </body>
 </html>

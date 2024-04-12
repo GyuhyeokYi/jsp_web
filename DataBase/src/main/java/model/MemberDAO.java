@@ -119,12 +119,11 @@ public class MemberDAO {
         try {
             getCon();
 
-            String sql = "UPDATE MEMBER SET EMAIL = ?, TEL = ? WHERE ID = ? AND PASS1 = ?";
+            String sql = "UPDATE MEMBER SET EMAIL = ?, TEL = ? WHERE ID = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setString(1, mbean.getEmail());
             pstmt.setString(2, mbean.getTel());
             pstmt.setString(3, mbean.getId());
-            pstmt.setString(4, mbean.getPass1());
 
             result = pstmt.executeUpdate();
             con.close();

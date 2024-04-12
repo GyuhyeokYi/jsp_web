@@ -22,10 +22,8 @@
     MemberDAO memberDAO = new MemberDAO();
     ArrayList<MemberBean> members = memberDAO.allSelectMember();
 %>
-<div class="container">
-    <div class="text-center">
-        <h2>모든 회원 보기, 회원 수(<%= members.size() %>)</h2>
-    </div>
+<div class="container text-center">
+    <h2>모든 회원 보기, 회원 수(<%= members.size() %>)</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -54,6 +52,7 @@
         %>
         </tbody>
     </table>
+    <button type="button" class="btn btn-primary" onclick="location.href='MemberJoin.jsp'">회원가입</button>
 </div>
 </body>
 </html>

@@ -55,7 +55,7 @@
 </div>
 <div class="container text-center">
     <button type="button" class="btn btn-primary" onclick="location.href='MemberUpdateForm.jsp?id=<%=memberBean.getId()%>'">회원수정</button>
-    <button type="button" class="btn btn-primary" onclick="location.href='MemberDeleteProc.jsp?id=<%=memberBean.getId()%>'">회원삭제</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='MemberDeleteForm.jsp?id=<%=memberBean.getId()%>'">회원삭제</button>
     <button type="button" class="btn btn-primary" onclick="location.href='MemberList.jsp'">목록보기</button>
     <button type="button" class="btn btn-primary" onclick="location.href='MemberJoin.jsp'">회원가입</button>
 </div>

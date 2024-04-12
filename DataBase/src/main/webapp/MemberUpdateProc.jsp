@@ -19,7 +19,8 @@
 
     if (mbean.getPass1().equals(pass)) {
         int result = memberDAO.updateMember(mbean);
-        if (result > 0) {%>
+        if (result > 0) {
+%>
 <script>
     alert("회원정보 수정을 성공하였습니다.")
     location.href = 'MemberList.jsp'

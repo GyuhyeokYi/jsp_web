@@ -19,14 +19,14 @@
         <table class="table table-striped align-middle">
             <tr>
                 <td>아이디</td>
-                <td><input class="form-control" type="text" name="id"></td>
+                <td><input class="form-control" type="text" name="id" required placeholder="아이디를 입력하세요."></td>
             </tr>
             <tr>
                 <td>패스워드</td>
-                <td><input class="form-control" type="password" name="id"></td>
+                <td><input class="form-control" type="password" name="id" required placeholder="비밀번호를 입력하세요."></td>
             </tr>
             <tr class="text-center">
-                <td colspan="2"><input class="form-check-input" type="checkbox" name="save"> 아이디 저장</td>
+                <td colspan="2"><input class="form-check-input" type="checkbox" name="save" checked> 아이디 저장</td>
             </tr>
             <tr class="text-center">
                 <td colspan="2"><button class="btn btn-primary" type="submit">로그인</button></td>

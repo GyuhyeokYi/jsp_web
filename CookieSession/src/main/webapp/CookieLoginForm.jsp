@@ -21,6 +21,7 @@
     for (Cookie cookie : cookies) {
         if ("id".equals(cookie.getName())) {
             id = cookie.getValue();
+            break;
         }
     }
 %>

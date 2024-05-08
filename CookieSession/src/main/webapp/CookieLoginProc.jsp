@@ -21,7 +21,14 @@
         // 사용자에게 쿠키 값을 넘겨 줌.
         response.addCookie(cookie);
 %>
-    <p>쿠키 생성 완료</p>
+<p>쿠키 생성 완료</p>
+<%
+    } else {
+        Cookie cookie = new Cookie("id", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+%>
+<p>쿠키 삭제됨</p>
 <%
     }
 %>

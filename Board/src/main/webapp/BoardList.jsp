@@ -17,18 +17,18 @@
 <body>
 <%
     BoardDAO dao = new BoardDAO();
-    ArrayList<BoardBean> list = dao.allSelectBorad();
+    ArrayList<BoardBean> list = dao.getAllBoard();
 %>
 <div class="container text-center">
-    <h2>게시판</h2>
-    <table class="table table-striped align-middle">
+    <h2>전체 게시글 보기</h2>
+    <table class="table table-striped align-middle text-center">
         <thead>
         <tr>
-            <th class="text-center" scope="col">#</th>
+            <th scope="col">#</th>
             <th scope="col">제목</th>
             <th scope="col">작성자</th>
-            <th scope="col">이메일</th>
             <th scope="col">작성일</th>
+            <th scope="col">조회수</th>
         </tr>
         </thead>
         <tbody>
@@ -36,20 +36,29 @@
             for (BoardBean board : list) {
         %>
         <tr>
-            <th class="text-center" scope="row"><%= list.indexOf(board) + 1 %></th>
-            <td>
-                <a href="BoradDetail.jsp?num=<%= board.getNum() %>"><%= board.getSubject() %></a>
-                    <%
-                        if ("Y".equals(board.getNewYn())) {
-                    %>
-                    &nbsp;<span class="badge bg-danger">N</span>
-                    <%
+            <th scope="row"><%= list.indexOf(board) + 1 %></th>
+            <td class="text-start">
+                <%
+                    if (board.getRe_step() > 1) {
+                        for (int i = 0; i < (board.getRe_step() - 1) * 2; i++) {
+                %>
+                &nbsp;
+                <%
                         }
-                    %>
+                    }
+                %>
+                <a href="BoardInfo.jsp?num=<%= board.getNum() %>"><%= board.getSubject() %></a>
+                <%
+                    if ("Y".equals(board.getNewYn())) {
+                %>
+                &nbsp;<span class="badge rounded-pill bg-danger">N</span>
+                <%
+                    }
+                %>
             </td>
             <td><%= board.getWriter() %></td>
-            <td><%= board.getEmail() %></td>
             <td><%= board.getReg_date() %></td>
+            <td><%= board.getReadcount() %></td>
         </tr>
         <%
             }
@@ -57,7 +66,7 @@
         </tbody>
     </table>
     <div class="container">
-        <button type="button" class="btn btn-primary" onclick="location.href='BoardWriteForm.jsp'">게시글작성</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='BoardWriteForm.jsp'">글쓰기</button>
     </div>
 </div>
 </body>

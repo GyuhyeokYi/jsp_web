@@ -2,6 +2,7 @@ package model;
 
 import lombok.Data;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 
 @Data
@@ -27,13 +28,20 @@ public class BoardBean {
             setEmail(resultSet.getString(3));
             setSubject(resultSet.getString(4));
             setPassword(resultSet.getString(5));
-            setReg_date(resultSet.getString(6));
+
+            Date regDate = resultSet.getDate(6);
+            setReg_date(regDate.toString());
             setRef(resultSet.getInt(7));
             setRe_step(resultSet.getInt(8));
             setRe_level(resultSet.getInt(9));
             setReadcount(resultSet.getInt(10));
             setContent(resultSet.getString(11));
-            setNewYn(resultSet.getString(12));
+
+            if (System.currentTimeMillis() - regDate.getTime() <= 1000 * 60 * 60 * 24 * 1) {
+                setNewYn("Y");
+            } else {
+                setNewYn("N");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

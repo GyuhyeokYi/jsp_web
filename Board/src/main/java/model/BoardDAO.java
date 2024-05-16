@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class BoardDAO {
 
@@ -90,7 +88,7 @@ public class BoardDAO {
 
             while (resultSet.next()) {
                 BoardBean board = new BoardBean();
-                board.setBoadData(resultSet);
+                board.setBoardData(resultSet);
                 list.add(board);
             }
             con.close();

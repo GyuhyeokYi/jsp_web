@@ -20,7 +20,7 @@ public class BoardBean {
     private String content;
     private String newYn;
 
-    public void setBoadData(ResultSet resultSet) {
+    public void setBoardData(ResultSet resultSet) {
         try {
             setNum(resultSet.getInt(1));
             setWriter(resultSet.getString(2));

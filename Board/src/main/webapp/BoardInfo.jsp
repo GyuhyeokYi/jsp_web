@@ -24,6 +24,12 @@
 <div class="container text-center">
     <h2>게시글 상세 화면</h2>
     <table class="table table-striped align-middle">
+        <colgroup>
+            <col style="width: 15%;">
+            <col style="width: 35%;">
+            <col style="width: 15%;">
+            <col style="width: 35%;">
+        </colgroup>
         <tr>
             <td>글번호</td>
             <td><%= board.getNum() %></td>

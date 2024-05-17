@@ -171,4 +171,41 @@ public class BoardDAO {
         }
         return  false;
     }
+
+    public BoardBean getOneUpdateBoard(int num) {
+        getCon();
+        try {
+            String sql = "SELECT * FROM BOARD WHERE NUM = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, num);
+            resultSet = stmt.executeQuery();
+            BoardBean board = new BoardBean();
+            if (resultSet.next()) {
+                board.setBoardData(resultSet);
+            }
+
+            con.close();
+            return board;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean updateBoard(BoardBean board) {
+        getCon();
+        try {
+            String sql = "UPDATE BOARD SET SUBJECT = ?, CONTENT = ? WHERE NUM = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, board.getSubject());
+            stmt.setString(2, board.getContent());
+            stmt.setInt(3, board.getNum());
+            stmt.executeUpdate();
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

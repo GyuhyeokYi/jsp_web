@@ -14,6 +14,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
+<style>
+    td a {
+        text-decoration: none;
+    }
+</style>
+<script>
+    function change(target, over) {
+        if (over) {
+            target.style.textDecoration = "underline"
+        } else {
+            target.style.textDecoration = "none"
+        }
+
+    }
+</script>
 <body>
 <%
     BoardDAO dao = new BoardDAO();
@@ -47,7 +62,7 @@
                         }
                     }
                 %>
-                <a href="BoardInfo.jsp?num=<%= board.getNum() %>"><%= board.getSubject() %></a>
+                <a href="BoardInfo.jsp?num=<%= board.getNum() %>" onmouseover="change(this, true)" onmouseout="change(this, false)"><%= board.getSubject() %></a>
                 <%
                     if ("Y".equals(board.getNewYn())) {
                 %>

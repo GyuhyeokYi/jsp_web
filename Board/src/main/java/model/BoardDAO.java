@@ -101,14 +101,18 @@ public class BoardDAO {
         return null;
     }
 
-    public ArrayList<BoardBean> getAllBoard() {
+    public ArrayList<BoardBean> getAllBoard(int startRow, int endRow) {
         ArrayList<BoardBean> list = new ArrayList<>();
         getCon();
         try {
 //            String sql = "SELECT A.*, CASE WHEN (SYSDATE - A.REG_DATE) <= 7 THEN 'Y' ELSE 'N' END AS NEW_YN " +
 //                    "FROM BOARD A ORDER BY A.NUM DESC";
-            String sql = "SELECT * FROM BOARD ORDER BY REF DESC, RE_STEP ASC, RE_LEVEL ASC";
+            String sql = "SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT *  FROM BOARD ORDER BY REF DESC, RE_STEP ASC, RE_LEVEL ASC) A) "
+                    + "WHERE RNUM >= ? AND RNUM <= ?";
+
             stmt = con.prepareStatement(sql);
+            stmt.setInt(1, startRow);
+            stmt.setInt(2, endRow);
             resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {
@@ -258,5 +262,22 @@ public class BoardDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public int getAllCount() {
+        getCon();
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM BOARD";
+            stmt = con.prepareStatement(sql);
+            resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                count = resultSet.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

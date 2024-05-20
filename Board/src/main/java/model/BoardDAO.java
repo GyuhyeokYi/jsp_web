@@ -34,7 +34,7 @@ public class BoardDAO {
 
             String sql = "insert into board values(BOARD_SEQ.nextval, ?, ?, ?, ?, SYSDATE," +
                     " (SELECT NVL(MAX(A.REF), 0) + 1 FROM BOARD A)" +
-                    ", ?, ?, 0, ?)";
+                    ", ?, ?, 0, ?, SYSDATE)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, board.getWriter());
             stmt.setString(2, board.getEmail());
@@ -152,7 +152,7 @@ public class BoardDAO {
             stmt.executeUpdate();
 
             // 답변글 저장, RE_STEP 1 증가,
-            String sql = "insert into board values(BOARD_SEQ.nextval, ?, ?, ?, ?, SYSDATE, ?, ?, ?, 0, ?)";
+            String sql = "insert into board values(BOARD_SEQ.nextval, ?, ?, ?, ?, SYSDATE, ?, ?, ?, 0, ?, SYSDATE)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, board.getWriter());
             stmt.setString(2, board.getEmail());
@@ -195,11 +195,62 @@ public class BoardDAO {
     public boolean updateBoard(BoardBean board) {
         getCon();
         try {
-            String sql = "UPDATE BOARD SET SUBJECT = ?, CONTENT = ? WHERE NUM = ?";
+            String sql = "UPDATE BOARD SET SUBJECT = ?, CONTENT = ?, MODI_DATE = SYSDATE WHERE NUM = ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, board.getSubject());
             stmt.setString(2, board.getContent());
             stmt.setInt(3, board.getNum());
+            stmt.executeUpdate();
+
+            String maxsql = "SELECT MAX(REF) FROM BOARD";
+            stmt = con.prepareStatement(maxsql);
+            resultSet = stmt.executeQuery();
+            int maxRef = 0;
+            if (resultSet.next()) {
+                maxRef = resultSet.getInt(1);
+            }
+
+            if (maxRef > board.getRef() && 1 == board.getRe_step()) {
+                String upmaxsql = "UPDATE BOARD SET REF = ? WHERE REF = ?";
+                stmt = con.prepareStatement(upmaxsql);
+                stmt.setInt(1, maxRef + 1);
+                stmt.setInt(2, board.getRef());
+                stmt.executeUpdate();
+            }
+
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public String getPass(int num) {
+        String pass = "";
+        getCon();
+        try {
+            String sql = "SELECT PASSWORD FROM BOARD WHERE NUM = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, num);
+            resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                pass =  resultSet.getString(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pass;
+    }
+
+    public boolean deleteBoard(BoardBean board) {
+        getCon();
+        try {
+            String sql = "DELETE FROM BOARD WHERE NUM = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, board.getNum());
             stmt.executeUpdate();
             con.close();
             return true;

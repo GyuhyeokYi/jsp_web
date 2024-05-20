@@ -20,6 +20,7 @@ public class BoardBean {
     private int readcount;
     private String content;
     private String newYn;
+    private String modi_date;
 
     public void setBoardData(ResultSet resultSet) {
         try {
@@ -37,7 +38,10 @@ public class BoardBean {
             setReadcount(resultSet.getInt(10));
             setContent(resultSet.getString(11));
 
-            if (System.currentTimeMillis() - regDate.getTime() <= 1000 * 60 * 60 * 24 * 1) {
+            Date modiDate = resultSet.getDate(12);
+            setModi_date(modiDate.toString());
+
+            if (System.currentTimeMillis() - modiDate.getTime() <= 1000 * 60 * 60 * 24 * 1) {
                 setNewYn("Y");
             } else {
                 setNewYn("N");

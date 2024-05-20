@@ -43,6 +43,7 @@
             <th scope="col">제목</th>
             <th scope="col">작성자</th>
             <th scope="col">작성일</th>
+            <th scope="col">수정일</th>
             <th scope="col">조회수</th>
         </tr>
         </thead>
@@ -73,6 +74,7 @@
             </td>
             <td><%= board.getWriter() %></td>
             <td><%= board.getReg_date() %></td>
+            <td><%= board.getModi_date() %></td>
             <td><%= board.getReadcount() %></td>
         </tr>
         <%

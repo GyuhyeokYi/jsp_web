@@ -39,12 +39,14 @@
         <tr>
             <td>작성자</td>
             <td><%= board.getWriter() %></td>
-            <td>작성일</td>
-            <td><%= board.getReg_date() %></td>
+            <td>이메일</td>
+            <td><%= board.getEmail() %></td>
         </tr>
         <tr>
-            <td>이메일</td>
-            <td colspan="3"><%= board.getEmail() %></td>
+            <td>작성일</td>
+            <td><%= board.getReg_date() %></td>
+            <td>수정일</td>
+            <td><%= board.getModi_date() %></td>
         </tr>
         <tr>
             <td>제목</td>

@@ -1,7 +1,6 @@
 <%@ page import="model.BoardDAO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.BoardBean" %>
-<%@ page import="model.Pagination" %><%--
+<%@ page import="model.BoardBean" %><%--
   Created by IntelliJ IDEA.
   User: kalit
   Date: 2024-05-14
@@ -32,22 +31,30 @@
 </script>
 <body>
 <%
+    int pageSize = 10;
     String pageNum = request.getParameter("pageNum");
     if (pageNum == null) {
         pageNum = "1";
     }
+    int count = 0;  // 전체 글의 갯수를 저장하는 변수
+    int number = 0; // 게시글 넘버링 변수
 
     // 현재 보고자하는 페이지 숫자를 저장
     int currentPage = Integer.parseInt(pageNum);
 
     BoardDAO dao = new BoardDAO();
     // 전체 게시글의 갯수를 읽어드리는 메소드 호출.
-    int count = dao.getAllCount();
+    count = dao.getAllCount();
 
-    int paeSize = 10;
-    int pageBlock = 7;
-    Pagination pagi = new Pagination(count, currentPage, paeSize, pageBlock);
-    ArrayList<BoardBean> list = dao.getAllBoard(pagi.getStartRow(), pagi.getEndRow());
+    // 현재 페이지에 보여줄 시작번호 설정 = 데이터 베이스에서 불러올 시작번호
+    int startRow = (currentPage - 1) * pageSize + 1;
+    int endRow = currentPage * pageSize;
+
+    // 최신글 10개를 기분으로 게시글을 리턴 받아주는 메소드 호출
+
+    ArrayList<BoardBean> list = dao.getAllBoard(startRow, endRow);
+
+    number = count - (currentPage - 1) * pageSize;
 %>
 <div class="container text-center">
     <h2>전체 게시글 보기</h2>
@@ -78,7 +85,7 @@
             for (BoardBean board : list) {
         %>
         <tr>
-            <th scope="row"><%= pagi.getNumber() - list.indexOf(board) %></th>
+            <th scope="row"><%= number-- %></th>
             <td class="text-start">
                 <%
                     if (board.getRe_step() > 1) {
@@ -111,15 +118,28 @@
     <div class="container">
         <p>
             <%
-                if (pagi.getCount() > 0) {
+                int pageBlock = 7; // 카운터링 숫자
+                if (count > 0) {
+                    int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1); // 페이지 갯수
+                    int startPage = 1;
+                    if (currentPage % pageBlock != 0) {
+                        startPage = (int)(currentPage / pageBlock) * pageBlock + 1;
+                    } else {
+                        startPage = ((int)(currentPage / pageBlock) - 1) * pageBlock  + 1;
+                    }
+
+                    int endPage = startPage + pageBlock - 1; //화면에 보여질 페이지의 마지막 숫자
+
+                    if (endPage > pageCount) endPage = pageCount;
+
                     // 이전이라는 링크를 만들건지 파악
-                    if (pagi.getPreviousPage() > 0) {
+                    if (startPage > pageBlock) {
             %>
-            <a href="BoardList.jsp?pageNum=<%= pagi.getPreviousPage() %>"> [이전] </a>
+            <a href="BoardList.jsp?pageNum=<%= startPage - pageBlock %>"> [이전] </a>
             <%
                 }
-                for (int i = pagi.getStartPage(); i <= pagi.getEndPage(); i++) {
-                    if ( i == pagi.getCurrentPage()) {
+                for (int i = startPage; i <= endPage; i++) {
+                    if ( i == currentPage) {
             %>
             <a href="BoardList.jsp?pageNum=<%= i %>"> <strong>[<%= i %>]</strong> </a>
             <%
@@ -130,13 +150,14 @@
                     }
                 }
                 // 다음이라는 링크를 만들건지 파악
-                if (pagi.getNextPage() > 0) {
+                if (endPage < pageCount) {
             %>
-            <a href="BoardList.jsp?pageNum=<%= pagi.getNextPage() %>"> [다음] </a>
+            <a href="BoardList.jsp?pageNum=<%= startPage + pageBlock %>"> [다음] </a>
             <%
                     }
                 }
             %>
+
         </p>
     </div>
 </div>

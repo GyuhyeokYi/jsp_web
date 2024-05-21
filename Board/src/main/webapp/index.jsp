@@ -10,8 +10,5 @@
 <br/>
 <a href="hello-servlet">Hello Servlet</a><br>
 <a href="BoardList.jsp">게시판</a>
-<%
-    response.sendRedirect("BoardList.jsp");
-%>
 </body>
 </html>

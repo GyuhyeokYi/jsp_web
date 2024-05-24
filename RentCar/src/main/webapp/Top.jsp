@@ -14,6 +14,9 @@
     .menu {
         background: red !important;
     }
+    .menu:hover {
+        background: blue !important;
+    }
     .menu a {
         text-decoration: none;
         color: white;
@@ -42,7 +45,6 @@
         }
     }
 </script>
-<div class="container text-center">
     <table class="table text-center align-middle">
         <colgroup>
             <col style="width: 20%;">
@@ -52,13 +54,13 @@
             <col style="width: 20%;">
         </colgroup>
         <tr>
-            <td colspan="2" class="text-start"><img src="./img/RENT.png" alt="로고" style="height: 65px;"></td>
+            <td colspan="2" class="text-start"><a href="RentcarMain.jsp"><img src="./img/RENT.png" alt="로고" style="height: 65px;"></a></td>
             <td colspan="3" class="text-end">
                 <strong><%= id %></strong>님 반갑습니다.&nbsp;
                 <%
                     if ("GUEST".equals(id)) {
                 %>
-                <button type="button" class="btn btn-dark btn-sm no-radius" onclick="openloginpopup()">로그인</button>
+                <button type="button" class="btn btn-dark btn-sm no-radius" onclick="window.location.href='RentcarMain.jsp?center=Login.jsp'">로그인</button>
                 <%
                     } else {
                 %>
@@ -70,13 +72,13 @@
             </td>
         </tr>
         <tr style="border-radius: 8px;">
-            <td class="menu"><strong><a href="#">예약하기</a></strong></td>
+            <td class="menu"><strong><a href="RentcarMain.jsp?center=CarReserveMain.jsp">예약하기</a></strong></td>
             <td class="menu"><strong><a href="#">예약확인</a></strong></td>
             <td class="menu"><strong><a href="#">자유게시판</a></strong></td>
             <td class="menu"><strong><a href="#">이벤트</a></strong></td>
-            <td class="menu"><strong><a href="#">고객센터</a></strong></td>
+        <td class="menu"><strong><a href="#">고객센터</a></strong></td>
         </tr>
     </table>
-</div>
+
 </body>
 </html>

@@ -16,12 +16,29 @@
     .no-radius {
         border-radius: unset;
     }
+    .carImg {
+        width: 100%;
+        height: 15rem;
+        object-fit: cover;
+    }
 </style>
 <body>
-<div class="container">
-    <jsp:include page="Top.jsp"/>
-    <jsp:include page="Center.jsp"/>
-    <jsp:include page="Bottom.jsp"/>
-</div>
+<%
+    String center = request.getParameter("center");
+    if (center == null) {
+        center = "Center.jsp";
+    }
+%>
+<table class="table table-borderless">
+    <tr>
+        <td><jsp:include page="Top.jsp"/></td>
+    </tr>
+    <tr>
+        <td><jsp:include page="<%= center %>"/></td>
+    </tr>
+    <tr>
+        <td><jsp:include page="Bottom.jsp"/></td>
+    </tr>
+</table>
 </body>
 </html>

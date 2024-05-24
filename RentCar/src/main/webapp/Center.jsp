@@ -13,13 +13,15 @@
 <style>
     .center {
         width: 100%;
-        height: 500px;
+        height: 390px;
         object-fit: cover;
     }
 </style>
 <body>
-<div class="container">
-    <img src="./img/Main.jpg" class="center" alt="메인">
-</div>
+<table class="table text-center table-borderless">
+    <tr>
+        <td><img src="./img/Main.jpg" class="center" alt="메인"></td>
+    </tr>
+</table>
 </body>
 </html>

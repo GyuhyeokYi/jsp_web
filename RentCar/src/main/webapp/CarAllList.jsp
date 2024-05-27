@@ -17,33 +17,35 @@
 <div class="container text-center">
     <table class="table text-center table-borderless">
         <colgroup>
-            <col style="width: 25%;">
-            <col style="width: 25%;">
-            <col style="width: 25%;">
-            <col style="width: 25%;">
+            <col style="width: calc(100% / 3);">
+            <col style="width: calc(100% / 3);">
+            <col style="width: calc(100% / 3);">
         </colgroup>
+        <tr>
+            <td colspan="3">
+                <div style="color: gray; font-size: 2rem;">전체 렌트가 보기</div>
+            </td>
+        </tr>
         <%
-            int col = 4;
+            int col = 3;
             for (CarListBean car: list) {
                 if (list.indexOf(car) % col == 0) {
         %>
         <tr>
-            <%
+        <%
                 }
-            %>
+        %>
             <td>
                 <a href="RentcarMain.jsp?center=CarReserveInfo.jsp?no=<%= car.getNo() %>"><img class="carImg" alt="" src="img/<%= car.getImg() %>"></a>
                 <p class="text-center">차량명 : <%= car.getName() %></p>
             </td>
-            <%
-                if (list.indexOf(car) % col == col - 1) {
-            %>
-        </tr>
         <%
-                }
             }
         %>
     </table>
+    <div class="container text-center">
+        <button type="button" class="btn btn-dark no-radius" onclick="window.history.back()">이전으로</button>
+    </div>
 </div>
 </body>
 </html>

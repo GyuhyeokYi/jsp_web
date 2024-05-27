@@ -18,41 +18,63 @@
 </style>
 <body>
 <%
+    String[] categoryNames = {"소형", "중형", "대형"};
     int no = Integer.parseInt(request.getParameter("no"));
     RentcarDAO rdao = new RentcarDAO();
-    CarListBean car = rdao.getCar(no);
+    CarListBean car = rdao.getOneCar(no);
 %>
 <div class="container text-center">
-    <table class="table table-borderless">
-        <colgroup>
-            <col style="width: 30%;">
-            <col style="width: 70%;">
-        </colgroup>
-        <tr>
-            <td>차량명</td>
-            <td><%= car.getName() %></td>
-        </tr>
-        <tr>
-            <td>타입</td>
-            <td><%= car.getCategory() %></td>
-        </tr>
-        <tr>
-            <td>가격</td>
-            <td><%= car.getPrice() %>원</td>
-        </tr>
-        <tr>
-            <td>탑승인원</td>
-            <td><%= car.getUsePeople() %></td>
-        </tr>
-        <tr>
-            <td>사진</td>
-            <td><img class="carImg" alt="" src="img/<%= car.getImg() %>"></td>
-        </tr>
-        <tr>
-            <td>설명</td>
-            <td><%= car.getInfo() %></td>
-        </tr>
-    </table>
+    <form action="RentcarMain.jsp?center=CarOptionSelect.jsp" method="post">
+        <table class="table table-borderless align-middle">
+            <colgroup>
+                <col style="width: 50%;">
+                <col style="width: 25%;">
+                <col style="width: 25%;">
+            </colgroup>
+            <tr>
+                <td colspan="3"><div style="color: gray; font-size: 2rem;"><%= car.getName()%> 차량 선택</div></td>
+            </tr>
+            <tr>
+                <td rowspan="6">
+                    <img alt="차량이미지" class="carImg" src="img/<%= car.getImg() %>">
+                </td>
+                <td style="text-align: center">차량이름</td>
+                <td><%= car.getName() %></td>
+            </tr>
+            <tr>
+                <td>차량수량</td>
+                <td>
+                    <select style="width: auto;" class="form-select" name="qty">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>차량분류</td>
+                <td><%= categoryNames[Integer.parseInt(car.getCategory()) - 1]%></td>
+            </tr>
+            <tr>
+                <td>대여가격</td>
+                <td><%= car.getPrice() %></td>
+            </tr>
+            <tr>
+                <td>제조회사</td>
+                <td><%= car.getCompany() %></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" name="no" value="<%= car.getNo() %>">
+                    <button type="submit" class="btn btn-dark no-radius" >옵션선택 후, 렌트하기</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="container text-center">
+        <div style="color: gray; font-size: 1.5rem;">차량 정보보기</div>
+        <p><%= car.getInfo() %></p>
+    </div>
 </div>
 </body>
 </html>

@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class RentcarDAO {
     Connection con;
@@ -91,7 +90,7 @@ public class RentcarDAO {
         return list;
     }
 
-    public CarListBean getCar(int no) {
+    public CarListBean getOneCar(int no) {
         CarListBean bean = new CarListBean();
         getCon();
         try {

@@ -17,6 +17,11 @@
 <div class="center text-center">
     <table class="table text-center table-borderless">
         <tr>
+            <td colspan="3">
+                <div style="color: gray; font-size: 2rem;">최신형 자동차</div>
+            </td>
+        </tr>
+        <tr>
             <%
                 for (CarListBean car : list) {
             %>

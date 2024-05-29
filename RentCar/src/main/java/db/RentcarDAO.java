@@ -107,4 +107,24 @@ public class RentcarDAO {
         }
         return bean;
     }
+
+    public int getMember(String id, String pass1) {
+        int result = 0;
+        getCon();
+
+        try {
+            String sql = "SELECT COUNT(*) FROM MEMBER WHERE ID = ? AND PASS1 = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, id);
+            stmt.setString(2, pass1);
+            resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  result;
+    }
 }

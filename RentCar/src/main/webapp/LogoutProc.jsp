@@ -11,6 +11,7 @@
 <%
     session.setAttribute("id", null);
     response.sendRedirect("RentcarMain.jsp");
+    session.setAttribute("lastPage", null);
 %>
 
 </body>

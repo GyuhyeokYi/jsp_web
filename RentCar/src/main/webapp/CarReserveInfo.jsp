@@ -66,6 +66,7 @@
             <tr>
                 <td colspan="2">
                     <input type="hidden" name="no" value="<%= car.getNo() %>">
+                    <input type="hidden" name="img" value="<%= car.getImg() %>">
                     <button type="submit" class="btn btn-dark no-radius" >옵션선택 후, 렌트하기</button>
                 </td>
             </tr>

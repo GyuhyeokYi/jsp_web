@@ -73,7 +73,7 @@
         </tr>
         <tr style="border-radius: 8px;">
             <td class="menu"><strong><a href="RentcarMain.jsp?center=CarReserveMain.jsp">예약하기</a></strong></td>
-            <td class="menu"><strong><a href="#">예약확인</a></strong></td>
+            <td class="menu"><strong><a href="RentcarMain.jsp?center=CarReserveConfirm.jsp">예약확인</a></strong></td>
             <td class="menu"><strong><a href="#">자유게시판</a></strong></td>
             <td class="menu"><strong><a href="#">이벤트</a></strong></td>
         <td class="menu"><strong><a href="#">고객센터</a></strong></td>

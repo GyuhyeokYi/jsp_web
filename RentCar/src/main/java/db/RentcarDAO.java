@@ -127,4 +127,97 @@ public class RentcarDAO {
         }
         return  result;
     }
+
+    public boolean setReserveCar(CarReserveBean rbean) {
+        getCon();
+
+        int reserveNo = 0;
+        try {
+            String sql = "INSERT INTO CAR_RESERVE VALUES(CAR_RESERVE_SEQ.nextVal,?,?,?,?,?,?,?,?,?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, rbean.getNo());
+            stmt.setString(2, rbean.getId());
+            stmt.setInt(3, rbean.getQty());
+            stmt.setInt(4, rbean.getRentalPeriod());
+            stmt.setString(5, rbean.getRentalDate());
+            stmt.setInt(6, rbean.getUseInsurance());
+            stmt.setInt(7, rbean.getUseWifi());
+            stmt.setInt(8, rbean.getUseNavi());
+            stmt.setInt(9, rbean.getUseSeat());
+            stmt.executeUpdate();
+
+            con.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public ArrayList<CarReserveBean> getCarReserveList(String id) {
+        ArrayList<CarReserveBean> list = new ArrayList<>();
+
+        getCon();
+        try {
+            String sql = "SELECT B.*, A.* FROM CAR_RESERVE A " +
+                    "INNER JOIN RENT_CAR B ON A.NO = B.NO WHERE A.ID = ? ORDER BY A.RESERVE_NO";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, id);
+            resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                CarListBean car = new CarListBean();
+                car.setCarListData(resultSet);
+
+                CarReserveBean bean = new CarReserveBean();
+                bean.setCarReserveData(resultSet, 8);
+
+                bean.setCar(car);
+                list.add(bean);
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public CarReserveBean getCarReserveOne(int reserveNo) {
+        getCon();
+        try {
+            String sql = "SELECT B.*, A.* FROM CAR_RESERVE A " +
+                    "INNER JOIN RENT_CAR B ON A.NO = B.NO WHERE A.RESERVE_NO = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, reserveNo);
+            resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                CarListBean car = new CarListBean();
+                car.setCarListData(resultSet);
+
+                CarReserveBean bean = new CarReserveBean();
+                bean.setCarReserveData(resultSet, 8);
+
+                bean.setCar(car);
+                con.close();
+                return bean;
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteCarReserve(int reserveNo) {
+        getCon();
+        try {
+            String sql = "DELETE FROM CAR_RESERVE WHERE RESERVE_NO = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, reserveNo);
+            stmt.executeUpdate();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -12,7 +12,7 @@
     const isCancel = confirm('자동차 대여를 취소 하기겠습까?')
     if (isCancel) {
         <%
-        int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
+        String reserveNo = request.getParameter("reserveNo");
         RentcarDAO rdao = new RentcarDAO();
         rdao.deleteCarReserve(reserveNo);
         %>

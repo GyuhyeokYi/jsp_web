@@ -19,7 +19,7 @@
 </style>
 <body>
 <%
-    int reserveNo = Integer.parseInt(request.getParameter("reserveNo"));
+    String reserveNo = request.getParameter("reserveNo");
     RentcarDAO rdao = new RentcarDAO();
     CarReserveBean rbean = rdao.getCarReserveOne(reserveNo);
 %>
@@ -32,13 +32,17 @@
                 <col style="width: 25%;">
             </colgroup>
             <tr>
-                <td colspan="3"><div style="color: gray; font-size: 2rem;">차량 예약 정보</div></td>
+                <td colspan="3"><div style="color: gray; font-size: 2rem;">차량 예약 정보(<%= rbean.getReserveNo() %>)</div></td>
             </tr>
             <tr>
-                <td rowspan="9">
+                <td rowspan="10">
                     <img alt="차량이미지" class="carImg" src="img/<%= rbean.getCar().getImg() %>">
                 </td>
-                <td style="text-align: center">차량이름</td>
+                <td style="text-align: center">예약일</td>
+                <td><%= rbean.getReserveDate() %></td>
+            </tr>
+            <tr>
+                <td>차량이름</td>
                 <td><%= rbean.getCar().getName() %></td>
             </tr>
             <tr>

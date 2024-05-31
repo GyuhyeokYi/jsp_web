@@ -2,11 +2,13 @@ package db;
 
 import lombok.Data;
 
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 @Data
 public class CarReserveBean {
-    private int reserveNo;
+    private String reserveNo;
     private int no;
     private String id;
     private int qty;
@@ -16,7 +18,13 @@ public class CarReserveBean {
     private int useWifi;
     private int useNavi;
     private int useSeat;
+    private Date instDtm;
     private CarListBean car;
+
+    public String getReserveDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(instDtm);
+    }
 
     public int calculateRentalPrice(int carPrice) {
         int rentalPrice = 0;
@@ -35,10 +43,15 @@ public class CarReserveBean {
         return rentalPrice;
     }
 
-    public void setCarReserveData(ResultSet resultSet, int offset) {
+    public void setCarReserveData(ResultSet resultSet, int offset, boolean join) {
         try {
-            reserveNo = resultSet.getInt(offset + 1);
-            no = resultSet.getInt(offset + 2);
+            if (join) {
+                no = resultSet.getInt(offset + 1);
+                reserveNo = resultSet.getString(offset + 2);
+            } else {
+                reserveNo = resultSet.getString(offset + 1);
+                no = resultSet.getInt(offset + 2);
+            }
             id = resultSet.getString(offset + 3);
             qty = resultSet.getInt(offset + 4);
             rentalPeriod = resultSet.getInt(offset + 5);
@@ -47,6 +60,7 @@ public class CarReserveBean {
             useWifi = resultSet.getInt(offset + 8);
             useNavi = resultSet.getInt(offset + 9);
             useSeat = resultSet.getInt(offset + 10);
+            instDtm = resultSet.getDate(offset + 11);
         } catch (Exception e) {
             e.printStackTrace();
         }

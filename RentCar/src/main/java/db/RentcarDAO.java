@@ -162,8 +162,9 @@ public class RentcarDAO {
             sql.append("SELECT * FROM (SELECT A.*, ROWNUM AS RNUM FROM (SELECT * FROM CAR_RESERVE NATURAL JOIN RENT_CAR WHERE 1=1 ");
             if (!"admin".equals(id)) {
                 sql.append("AND ID = ? ");
+                sql.append("AND TO_DATE(RENTAL_DATE, 'YYYY-MM-DD') > SYSDATE -1 ");
             }
-            sql.append("AND TO_DATE(RENTAL_DATE, 'YYYY-MM-DD') > SYSDATE -1 ORDER BY INST_DTM DESC) A) ");
+            sql.append("ORDER BY INST_DTM DESC) A) ");
             sql.append("WHERE RNUM >= ? AND RNUM <= ?");
             stmt = con.prepareStatement(sql.toString());
             if (!"admin".equals(id)) {

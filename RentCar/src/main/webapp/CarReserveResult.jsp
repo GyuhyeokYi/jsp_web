@@ -38,6 +38,7 @@
     window.location.href = "RentcarMain.jsp?center=Login.jsp"
 </script>
 <%
+        return;
     } else {
         session.setAttribute("lastPage", null);
         if (rbean.getRentalDate() == null) {

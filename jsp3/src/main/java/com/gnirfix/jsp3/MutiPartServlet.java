@@ -9,6 +9,7 @@ import jakarta.servlet.http.Part;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -32,7 +33,6 @@ public class MutiPartServlet extends HttpServlet {
         }
 
         String fileName = null;
-        String uplaodYn = "Y";
         try {
             for (Part part : request.getParts()) {
                 fileName = part.getSubmittedFileName();
@@ -40,20 +40,14 @@ public class MutiPartServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            uplaodYn = "N";
+            response.sendRedirect("FileUpProc.jsp?uploadYn=N&fileName=" + encoding(fileName));
+            return;
         }
-
-        try {
-            sendResult(uplaodYn, fileName, response);
-        } catch (Exception e) {
-            throw new IOException(e.getMessage());
-        }
-
+        response.sendRedirect("FileUpProc.jsp?uploadYn=Y&fileName=" + encoding(fileName));
     }
 
-    public void sendResult(String uploadYn, String fileName, HttpServletResponse response) throws IOException {
-        String fileNameURL = URLEncoder.encode(fileName, "UTF-8");
-        String fileNameBase64 = Base64.getEncoder().encodeToString(fileNameURL.getBytes(StandardCharsets.UTF_8));
-        response.sendRedirect("FileUpProc.jsp?uploadYn=Y&fileName=" + fileNameBase64);
+    public String encoding(String name) {
+        String nameUrl = URLEncoder.encode(name, StandardCharsets.UTF_8);
+        return Base64.getEncoder().encodeToString(nameUrl.getBytes(StandardCharsets.UTF_8));
     }
 }

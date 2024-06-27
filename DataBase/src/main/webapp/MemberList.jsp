@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="model.MemberDAO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.MemberBean" %><%--
@@ -22,6 +23,7 @@
 <%
     MemberDAO memberDAO = new MemberDAO();
     ArrayList<MemberBean> members = memberDAO.allSelectMember();
+    request.setAttribute("members", members);
 %>
 <div class="container text-center">
     <h2>모든 회원 보기, 회원 수(<%= members.size() %>)</h2>
@@ -37,20 +39,30 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            for(MemberBean member: members) {
-        %>
-        <tr>
-            <th class="text-center" scope="row"><%= members.indexOf(member) + 1 %></th>
-            <td><a href="MemberInfo.jsp?id=<%= member.getId() %>"><%= member.getId() %></a></td>
-            <td><%= member.getEmail() %></td>
-            <td><%= member.getTel() %></td>
-            <td><%= member.getHobby() %></td>
-            <td><%= member.getInstDtm() %></td>
-        </tr>
-        <%
-            }
-        %>
+<%--        <%--%>
+<%--            for(MemberBean member: members) {--%>
+<%--        %>--%>
+<%--        <tr>--%>
+<%--            <th class="text-center" scope="row"><%= members.indexOf(member) + 1 %></th>--%>
+<%--            <td><a href="MemberInfo.jsp?id=<%= member.getId() %>"><%= member.getId() %></a></td>--%>
+<%--            <td><%= member.getEmail() %></td>--%>
+<%--            <td><%= member.getTel() %></td>--%>
+<%--            <td><%= member.getHobby() %></td>--%>
+<%--            <td><%= member.getInstDtm() %></td>--%>
+<%--        </tr>--%>
+<%--        <%--%>
+<%--            }--%>
+<%--        %>--%>
+        <c:forEach var="member" items="${members}">
+            <tr>
+                <th class="text-center" scope="row">${members.indexOf(member) + 1}</th>
+                <td><a href="MemberInfo.jsp?id=${member.id}">${member.id}</a></td>
+                <td>${member.email}</td>
+                <td>${member.tel}</td>
+                <td>${member.hobby}</td>
+                <td>${member.instDtm}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
     <button type="button" class="btn btn-primary" onclick="location.href='MemberJoin.jsp'">회원가입</button>
